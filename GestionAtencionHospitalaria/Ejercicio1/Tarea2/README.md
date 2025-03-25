@@ -4,14 +4,15 @@
 
 Este programa simula la llegada de **10 pacientes** a un hospital donde hay **3 médicos disponibles**.  
 Cada paciente tiene un **tiempo de llegada** simulado entre los segundos 0 y 9, y un **tiempo de consulta aleatorio** entre 5 y 15 segundos.  
-Cada médico solo puede atender a **un paciente a la vez**.  
-Si todos los médicos están ocupados cuando llega un paciente, este espera a que se libere alguno.
+Cada médico atiende a los pacientes en orden de llegada, y cada uno está gestionado por un **hilo independiente**.
+
+Los pacientes llegan progresivamente y se **encolan** a medida que llegan. Los médicos, funcionando en paralelo, van **atendiendo pacientes disponibles en la cola**, uno por uno, hasta que se ha completado toda la atención.
 
 El programa está diseñado para respetar la concurrencia, asegurando que:
 - Cada paciente es atendido individualmente por un único médico.
-- La llegada y la atención se controlan mediante `Thread.Sleep()`.
-- Se utilizan semáforos (`SemaphoreSlim`) para controlar el acceso a los médicos.
-- La aleatoriedad y la integridad de datos se protegen mediante `lock`.
+- La llegada y la atención se simulan mediante `Thread.Sleep()`.
+- Se utilizan hilos para los médicos y una cola protegida para los pacientes.
+- La integridad de los datos se garantiza mediante `lock`.
 
 ---
 
@@ -19,7 +20,7 @@ El programa está diseñado para respetar la concurrencia, asegurando que:
 
 - Lenguaje: C#
 - Plataforma: .NET Console App
-- Concurrencia: `Thread`, `SemaphoreSlim`, `lock`, `Random`
+- Concurrencia: `Thread`, `Queue`, `lock`, `Random`
 
 ---
 
@@ -27,23 +28,23 @@ El programa está diseñado para respetar la concurrencia, asegurando que:
 
 ### ¿Cuántos hilos se están ejecutando en este programa?
 
-Se están ejecutando **10 hilos**, uno por cada paciente.  
-Cada paciente es gestionado por un hilo independiente que espera su tiempo de llegada, solicita un médico disponible y simula el tiempo de consulta.  
-Además, el hilo principal (`Main`) se encarga de crear los pacientes, inicializar los semáforos y lanzar los hilos concurrentes.
+Se ejecutan **13 hilos** en total:
+
+- **10 hilos**, uno por cada paciente, que simulan su llegada al hospital en tiempos distintos.
+- **3 hilos**, uno por cada médico, que atienden pacientes desde una cola compartida.
+
+Cada hilo médico permanece activo hasta que se ha atendido a todos los pacientes.  
+El hilo principal (`Main`) lanza todos los hilos y no participa directamente en la atención.
 
 ---
 
 ### ¿Cuál de los pacientes entra primero en consulta?
 
-En general, el paciente que **entra primero en consulta** será aquel que **llega antes al hospital** y encuentra un médico disponible justo al llegar.
+En este programa, los pacientes se encolan en orden de llegada.  
+El primer paciente que **llega y encuentra a un médico disponible** será el primero en entrar en consulta.
 
-En este programa, cada paciente se lanza en su propio hilo y espera su tiempo de llegada (`LlegadaHospital`).  
-Una vez llega, intenta acceder a un médico libre.  
-Si lo consigue de inmediato, entra en consulta; si no, espera hasta que uno esté disponible.
-
-Por lo tanto, lo más habitual es que el **paciente con `LlegadaHospital = 0`** sea el primero en entrar,  
-aunque **si varios llegan muy cerca en el tiempo**, la asignación también dependerá de cómo el sistema planifique los hilos y qué médico esté libre en ese momento.
-
+Normalmente será el paciente que tiene `LlegadaHospital = 0`,  
+pero el orden real puede verse afectado por la disponibilidad del médico en ese instante.
 
 ---
 
@@ -52,11 +53,11 @@ aunque **si varios llegan muy cerca en el tiempo**, la asignación también depe
 Depende de:
 - El tiempo de llegada (`LlegadaHospital`)
 - El tiempo de consulta (`TiempoConsulta`)
-- La disponibilidad del médico asignado
+- Qué médico esté disponible primero
 
-Por ejemplo, si un paciente que llega más tarde tiene un tiempo de consulta muy corto y un médico libre justo al llegar, **puede salir antes que otros pacientes que llegaron antes pero tienen tiempos de consulta más largos** o esperaron por médico.
+Un paciente que llega más tarde pero tiene un tiempo de consulta muy corto y encuentra un médico libre de inmediato **puede salir antes** que otro que llegó antes pero tuvo que esperar o tenía una consulta más larga.
 
-Este comportamiento refleja una gestión concurrente realista de los recursos.
+Este comportamiento refleja una simulación concurrente más fiel a la realidad.
 
 ---
 

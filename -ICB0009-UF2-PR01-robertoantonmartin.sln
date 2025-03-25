@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GestionAtencionHospitalaria", "GestionAtencionHospitalaria", "{B43A8472-F285-26C1-5D62-0CA8FC70D451}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ejercicio1", "Ejercicio1", "{6556846D-C631-4931-0FD9-6090CD2B19E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tarea1", "GestionAtencionHospitalaria\Ejercicio1\Tarea1\Tarea1.csproj", "{8FE6A363-3E6D-8C03-7B95-ADA57C009207}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FE6A363-3E6D-8C03-7B95-ADA57C009207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FE6A363-3E6D-8C03-7B95-ADA57C009207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FE6A363-3E6D-8C03-7B95-ADA57C009207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FE6A363-3E6D-8C03-7B95-ADA57C009207}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6556846D-C631-4931-0FD9-6090CD2B19E1} = {B43A8472-F285-26C1-5D62-0CA8FC70D451}
+		{8FE6A363-3E6D-8C03-7B95-ADA57C009207} = {6556846D-C631-4931-0FD9-6090CD2B19E1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18AFC779-942C-45BA-848C-C3248F241B76}
+	EndGlobalSection
+EndGlobal
