@@ -18,38 +18,45 @@ Esto me permite simular un día de hospital con pacientes llegando poco a poco, 
 
 ### Tarea 1 – ¿Cumple requisitos?
 
-####  Pruebas
+#### Pruebas
 
 He realizado tres pruebas completas con diferentes cantidades de pacientes:
 
--  **50 pacientes**
+- **50 pacientes**
   - Todo fue bien.
   - El sistema iba rápido, sin cuellos de botella.
   - Las máquinas de diagnóstico funcionaron sin esperas largas.
 
--  **100 pacientes**
-  - Ya empezaban a acumularse pacientes esperando diagnóstico.
-  - Aun así, todo seguía funcionando sin errores ni retrasos excesivos.
-
--  **1000 pacientes**
-  - Aquí sí que se notaron largos tiempos de espera en diagnóstico.
-  - Aun así, **ningún paciente se quedó bloqueado** y el programa terminó correctamente.
-
-Además, algo que he observado es que al usar `rand.Next(1, 101)` para generar los IDs, hay pacientes con el mismo número de ID. Esto **no afecta al funcionamiento**, ya que lo que manda es el orden de llegada (`OrdenLlegada`). Aun así, en un sistema real seguramente se usaría un ID único.
-
- Capturas:
+**Capturas:**
 
 - ![Inicio 50](../../Capturas/Tarea9-p50.png)
 - ![Fin 50](../../Capturas/Tarea9-f50.png)
-- ![Inicio 100](../../Capturas/Tarea9-p100.png)
-- ![Fin 100](../../Capturas/Tarea9-f100.png)
-- ![Inicio 1000](../../Capturas/Tarea9-p1000.png)
-- ![Fin 1000](../../Capturas/Tarea9-f1000.png)
-
 
 ---
 
-####  Explicación
+- **100 pacientes**
+  - Ya empezaban a acumularse pacientes esperando diagnóstico.
+  - Aun así, todo seguía funcionando sin errores ni retrasos excesivos.
+
+**Capturas:**
+
+- ![Inicio 100](../../Capturas/Tarea9-p100.png)
+- ![Fin 100](../../Capturas/Tarea9-f100.png)
+
+---
+
+- **1000 pacientes**
+  - Aquí sí que se notaron largos tiempos de espera en diagnóstico.
+  - Aun así, **ningún paciente se quedó bloqueado** y el programa terminó correctamente.
+
+**Capturas:**
+
+- ![Inicio 1000](../../Capturas/Tarea9-p1000.png)
+- ![Fin 1000](../../Capturas/Tarea9-f1000.png)
+
+---
+
+#### Explicación
 
 He aprovechado todo lo que ya tenía del ejercicio anterior y simplemente he adaptado el generador para que cree pacientes de forma continua.
 
@@ -63,7 +70,7 @@ Con esto, el sistema sigue funcionando correctamente, incluso con 1000 pacientes
 
 ### Tarea 2 – ¿Qué comportamientos no previstos detectas?
 
-####  Pruebas
+#### Pruebas
 
 En la prueba con 1000 pacientes he observado cosas que no había visto con menos volumen:
 
@@ -73,7 +80,7 @@ En la prueba con 1000 pacientes he observado cosas que no había visto con menos
 
 ---
 
-####  Explicación
+#### Explicación
 
 El problema más evidente ha sido que **solo hay 2 máquinas de diagnóstico**. Con tantos pacientes, se forma un tapón enorme en esa parte.
 
@@ -85,7 +92,7 @@ Otra cosa que podría mejorarse es la espera activa que hace cada paciente para 
 
 ### Tarea 3 – ¿Cómo adaptarías tu solución?
 
-####  Explicación
+#### Explicación
 
 Si tuviera que hacer que esto funcionara con miles de pacientes en un hospital más grande o durante más tiempo, estas serían mis ideas para mejorar:
 
@@ -100,5 +107,3 @@ Si tuviera que hacer que esto funcionara con miles de pacientes en un hospital m
 ## Conclusión
 
 Este ejercicio me ha servido para ver cómo se comporta un sistema concurrente cuando empieza a recibir más carga. He podido mantener el orden, la prioridad y la sincronización, pero también me ha hecho pensar en cómo escalar este tipo de aplicaciones si hiciera falta en el futuro.
-
-
