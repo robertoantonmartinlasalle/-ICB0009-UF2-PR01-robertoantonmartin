@@ -39,7 +39,7 @@ Además, algo que he observado es que al usar `rand.Next(1, 101)` para generar l
 
  Capturas:
 
-- ![Inicio 50](../../Capturas/Tarea9p50.png)
+- ![Inicio 50](../../Capturas/Tarea9-p50.png)
 - ![Fin 50](../../Capturas/Tarea9-f50.png)
 - ![Inicio 100](../../Capturas/Tarea9-p100.png)
 - ![Fin 100](../../Capturas/Tarea9-f100.png)
